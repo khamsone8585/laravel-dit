@@ -1,0 +1,11 @@
+@font-face {
+    font-family: 'Phetsarath_OT';
+    src: url('../laos/phetsarath_ot.eot');
+    src: url('../laos/phetsarath_ot.eot?#iefix') format('embedded-opentype'),
+    url('../laos/phetsarath_ot.woff2') format('woff2'),
+    url('../laos/phetsarath_ot.woff') format('woff'),
+    url('../laos/phetsarath_ot.ttf') format('truetype'),
+    url('../laos/phetsarath_ot.svg#Phetsarath_OT') format('svg');
+    font-weight: normal;
+    font-style: normal;
+    }
