@@ -3,7 +3,7 @@
 
 <head>
     <title>DIT-MOIC | admin | @yield('title') </title>
-    
+
 
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -40,6 +40,10 @@
     <!-- Responsive.css-->
     <link rel="stylesheet" type="text/css" href="{{asset('backend/assets/css/responsive.css')}}">
 
+    <!-- summernote css/js -->
+    <link href="https://cdn.jsdelivr.net/npm/summernote@0.8.18/dist/summernote-bs4.min.css" rel="stylesheet">
+    <script src="https://cdn.jsdelivr.net/npm/summernote@0.8.18/dist/summernote-bs4.min.js"></script>
+
     </head>
 
     <body class="sidebar-mini fixed">
@@ -57,7 +61,6 @@
             <!-- Main content starts -->
                 @yield('content')
             <!-- Main content ends -->
-
         </div>
     </div>
     <!-- Required Jqurey -->
@@ -97,6 +100,15 @@
     <script type="text/javascript" src="{{asset('backend/assets/pages/dashboard.js')}}"></script>
     <script type="text/javascript" src="{{asset('backend/assets/pages/elements.js')}}"></script>
     <script type="text/javascript" src="{{asset('backend/assets/js/menu.min.js')}}"></script>
+
+    <!-- summernote css/js -->
+    <link href="https://cdn.jsdelivr.net/npm/summernote@0.8.18/dist/summernote-bs4.min.css" rel="stylesheet">
+    <script src="https://cdn.jsdelivr.net/npm/summernote@0.8.18/dist/summernote-bs4.min.js"></script>
+    <script type="text/javascript">
+        $('#summernote').summernote({
+            height: 400
+        });
+    </script>
 <script>
 var $window = $(window);
 var nav = $('.fixed-button');

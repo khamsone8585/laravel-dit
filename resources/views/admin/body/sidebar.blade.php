@@ -4,14 +4,14 @@
        <ul class="sidebar-menu">
            <li class="nav-level"><h5>---ລາຍງານ</h5></li>
            <li class="active treeview">
-               <a class="waves-effect waves-dark" href="">
+               <a class="waves-effect waves-dark" href="{{route('dashboard')}}">
                    <i class="icon-speedometer"></i><span> Dashboard</span>
                </a>
            </li>
            <li class="nav-level"><h5>--- ເມນູ</h5></li>
            <li class="treeview"><a class="waves-effect waves-dark" href="#!"><i class="icon-briefcase"></i><span> ກ່ຽວກັບພວກເຮົາ</span><i class="icon-arrow-down"></i></a>
                <ul class="treeview-menu">
-                   <li><a class="waves-effect waves-dark" href=""></i> ປະຫວັດຄວາມເປັນມາ</a></li>
+                   <li><a class="waves-effect waves-dark" href="{{route('history.index')}}"></i> ປະຫວັດຄວາມເປັນມາ</a></li>
                    <li><a class="waves-effect waves-dark" href=""></i> ໂຄງຮ່າງການຈັດຕັ້ງ</a></li>
                    <li><a class="waves-effect waves-dark" href="label-badge.html"></i> ພາລະບົດບາດ</a></li>
                    <li><a class="waves-effect waves-dark" href="label-badge.html"></i> ບົດລາຍງານປະຈຳປີ</a></li>

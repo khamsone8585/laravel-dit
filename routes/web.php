@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\AdminController;
+use App\Http\Controllers\Backend\HistoryController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -23,3 +24,6 @@ Route::middleware(['auth:sanctum', 'verified'])->get('/dashboard', function () {
 
 //admin logout
 Route::get('admin/logout',[AdminController::class,'Logout'])->name('admin.logout');
+
+//admin History
+Route::resource('admin/history',HistoryController::class);
