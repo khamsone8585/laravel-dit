@@ -26,4 +26,4 @@ Route::middleware(['auth:sanctum', 'verified'])->get('/dashboard', function () {
 Route::get('admin/logout',[AdminController::class,'Logout'])->name('admin.logout');
 
 //admin History
-Route::resource('admin/history',HistoryController::class);
+Route::resource('history',HistoryController::class);

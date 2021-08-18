@@ -42,7 +42,6 @@
 
     <!-- summernote css/js -->
     <link href="https://cdn.jsdelivr.net/npm/summernote@0.8.18/dist/summernote-bs4.min.css" rel="stylesheet">
-    <script src="https://cdn.jsdelivr.net/npm/summernote@0.8.18/dist/summernote-bs4.min.js"></script>
 
     </head>
 
@@ -64,6 +63,7 @@
         </div>
     </div>
     <!-- Required Jqurey -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
     <script src="{{asset('backend/assets/plugins/Jquery/dist/jquery.min.js')}}"></script>
     <script src="{{asset('backend/assets/plugins/jquery-ui/jquery-ui.min.js')}}"></script>
     <script src="{{asset('backend/assets/plugins/tether/dist/js/tether.min.js')}}"></script>
@@ -102,25 +102,26 @@
     <script type="text/javascript" src="{{asset('backend/assets/js/menu.min.js')}}"></script>
 
     <!-- summernote css/js -->
-    <link href="https://cdn.jsdelivr.net/npm/summernote@0.8.18/dist/summernote-bs4.min.css" rel="stylesheet">
     <script src="https://cdn.jsdelivr.net/npm/summernote@0.8.18/dist/summernote-bs4.min.js"></script>
     <script type="text/javascript">
-        $('#summernote').summernote({
-            height: 400
+        $(document).ready(function () {
+            $('#summernote').summernote({
+                height: 450,
+            });
         });
     </script>
-<script>
-var $window = $(window);
-var nav = $('.fixed-button');
-$window.scroll(function(){
-    if ($window.scrollTop() >= 200) {
-       nav.addClass('active');
-    }
-    else {
-       nav.removeClass('active');
-    }
-});
-</script>
+    <script>
+        var $window = $(window);
+        var nav = $('.fixed-button');
+        $window.scroll(function(){
+            if ($window.scrollTop() >= 200) {
+            nav.addClass('active');
+            }
+            else {
+            nav.removeClass('active');
+            }
+        });
+    </script>
 
 </body>
 

@@ -3,6 +3,8 @@
 namespace App\Http\Controllers\Backend;
 
 use App\Http\Controllers\Controller;
+use App\Models\History;
+use App\Http\Requests\HistoryPost;
 use Illuminate\Http\Request;
 
 class HistoryController extends Controller
@@ -14,7 +16,8 @@ class HistoryController extends Controller
      */
     public function index()
     {
-        return view('admin.history.index');
+        $history = History::all();
+        return view('admin.history.index',compact('history'));
     }
 
     /**
@@ -24,7 +27,7 @@ class HistoryController extends Controller
      */
     public function create()
     {
-        //
+
     }
 
     /**
@@ -33,7 +36,7 @@ class HistoryController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(HistoryPost $request)
     {
         //
     }
@@ -57,7 +60,8 @@ class HistoryController extends Controller
      */
     public function edit($id)
     {
-        //
+        $history = History::find($id);
+        return view('admin.history.edit',compact('history'));
     }
 
     /**
@@ -67,9 +71,16 @@ class HistoryController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(HistoryPost $request, $id)
     {
-        //
+        $history = History::findOrFail($id);
+        $validatedData = $request->validated();
+
+        $history->fill($validatedData);
+        $history->save();
+        $request->session()->flash('status', 'ຂໍ້ມູນປະຫວັດຄວາມເປັນມາອັບເດດສຳເລັດ!');
+
+        return redirect()->route('history.index');
     }
 
     /**
