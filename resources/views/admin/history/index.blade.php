@@ -67,6 +67,14 @@
                     @forelse ($history as $item)
                     <div class="card">
                         <div class="card-block">
+                            <div class="row">
+                                <div class="col-xl-2 col-lg-3 col-sm-3 col-xs-12">
+                                    <a href="{{ $item->image }}" class="pop">
+                                        <img src="{{ $item->image }}" class="img-fluid" alt="" style="width: 400px; height: 264px;">
+                                    </a>
+                                </div>
+                            </div>
+                        </div>
                            <div class="md-card-block">
                               <p class="m-b-20">
                                  <span class="f-w-600 f-16 d-block m-b-10">ປະຫວັດຄວາມເປັນມາ</span>
@@ -79,6 +87,16 @@
                         <p>No blog posts yet!</p>
                     @endforelse
                 </div>
+            </div>
+        </div>
+    </div>
+    <div class="modal fade" id="imagemodal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+            <div class="modal-body">
+                <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
+                <img src="" class="imagepreview" style="width: 100%;" >
+            </div>
             </div>
         </div>
     </div>

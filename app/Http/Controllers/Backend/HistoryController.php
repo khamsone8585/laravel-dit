@@ -5,6 +5,9 @@ namespace App\Http\Controllers\Backend;
 use App\Http\Controllers\Controller;
 use App\Models\History;
 use App\Http\Requests\HistoryPost;
+use DB;
+use Auth;
+use Image;
 use Illuminate\Http\Request;
 
 class HistoryController extends Controller
@@ -77,10 +80,34 @@ class HistoryController extends Controller
         $validatedData = $request->validated();
 
         $history->fill($validatedData);
-        $history->save();
-        $request->session()->flash('status', 'ຂໍ້ມູນປະຫວັດຄວາມເປັນມາອັບເດດສຳເລັດ!');
 
-        return redirect()->route('history.index');
+        $oldimage = $request->oldimage;
+  	    $image = $request->image;
+            if ($image) {
+                $image_one = uniqid().'.'.$image->getClientOriginalExtension();
+                Image::make($image)->resize(500,300)->save('image/history/'.$image_one);
+                $data['image'] = 'image/history/'.$image_one;
+                // image/postimg/343434.png
+                DB::table('histories')->where('id',$id)->update($data);
+                unlink($oldimage);
+
+                $notification = array(
+                'message' => 'Post Updated Successfully',
+                'alert-type' => 'success'
+            );
+
+            return Redirect()->route('history.index')->with($notification);
+
+            }else{
+                $data['image'] = $oldimage;
+                DB::table('histories')->where('id',$id)->update($data);
+
+                $notification = array(
+                'message' => 'Post Updated Successfully',
+                'alert-type' => 'success'
+            );
+            return Redirect()->route('history.index')->with($notification);
+            }
     }
 
     /**

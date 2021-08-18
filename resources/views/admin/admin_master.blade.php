@@ -33,7 +33,6 @@
     <!-- Weather css -->
     <link href="{{asset('backend/assets/css/svg-weather.css')}}" rel="stylesheet">
 
-
     <!-- Style.css -->
     <link rel="stylesheet" type="text/css" href="{{asset('backend/assets/css/main.css')}}">
 
@@ -122,7 +121,15 @@
             }
         });
     </script>
-
+    {{-- preview image --}}
+    <script>
+        $(function() {
+            $('.pop').on('click', function() {
+                $('.imagepreview').attr('src', $(this).find('img').attr('src'));
+                $('#imagemodal').modal('show');
+            });
+        });
+    </script>
 </body>
 
 </html>
