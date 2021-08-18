@@ -16,7 +16,6 @@
                 </ol>
             </div>
         </div>
-<<<<<<< HEAD
         <div class="col-sm-6">
             <div class="card-block">
                 <div class="row">
@@ -98,14 +97,6 @@
                 <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
                 <img src="" class="imagepreview" style="width: 100%;" >
             </div>
-=======
-        <div class="col-sm-12 py-3">
-            <div class="form-group">
-                <label for="exampleTextarea" class="form-control-label">ເນື້ອໃນ</label>
-                <textarea class="form-control" name="summernote" id="summernote">
-                    ສະບາຍດີທົດສອບໆສະບາຍດີທົດສອບໆສະບາຍດີທົດສອບໆສະບາຍດີທົດສອບໆສະບາຍດີທົດສອບໆສະບາຍດີທົດສອບໆສະບາຍດີທົດສອບໆສະບາຍດີທົດສອບໆສະບາຍດີທົດສອບໆສະບາຍດີທົດສອບໆສະບາຍດີທົດສອບໆສະບາຍດີທົດສອບໆສະບາຍດີທົດສອບໆສະບາຍດີທົດສອບໆສະບາຍດີທົດສອບໆສະບາຍດີທົດສອບໆສະບາຍດີທົດສອບໆສະບາຍດີທົດສອບໆສະບາຍດີທົດສອບໆສະບາຍດີທົດສອບໆ
-                </textarea>
->>>>>>> 93fc5df... pull com2
             </div>
         </div>
     </div>
