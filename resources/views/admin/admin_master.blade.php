@@ -130,8 +130,6 @@
             });
         });
     </script>
-<<<<<<< HEAD
-=======
     <script>
     var $window = $(window);
     var nav = $('.fixed-button');
@@ -145,7 +143,6 @@
     });
     </script>
 
->>>>>>> 93fc5df... pull com2
 </body>
 
 </html>

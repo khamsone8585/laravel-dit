@@ -24,7 +24,7 @@ class HistoryPost extends FormRequest
     public function rules()
     {
         return [
-            'image' => 'required|min:5',
+            'image' => 'required|image|mimes:jpeg,png,jpg,gif,svg|max:2048',
             'content' => 'required|min:10'
         ];
     }

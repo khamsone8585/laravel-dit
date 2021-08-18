@@ -33,7 +33,6 @@
                             <tbody>
                                 @forelse ($history as $item)
                             <tr>
-
                                 <td>1</td>
                                 <td><img src="{{asset($item->image)}}" style="height: 40px; with:70px;" alt=""></td>
                                 <td>{{ Str::limit($item->content, 15) }}</td>
@@ -63,28 +62,29 @@
                 <div class="content">
                     <div class="card-header text-center">
                         <h5 class="card-header-text">ຕົວຢ່າງສະແດງເນື້ອໃນ</h5>
-                     </div>
-                    @forelse ($history as $item)
+                    </div>
+
+                    @forelse ( $history as $item )
+
                     <div class="card">
                         <div class="card-block">
                             <div class="row">
                                 <div class="col-xl-2 col-lg-3 col-sm-3 col-xs-12">
-                                    <a href="{{ $item->image }}" class="pop">
-                                        <img src="{{ $item->image }}" class="img-fluid" alt="" style="width: 400px; height: 264px;">
+                                    <a href="" class="pop">
+                                        <img src="{{ $item->image }}" class="img-fluid" height="200" width="200">
                                     </a>
                                 </div>
                             </div>
                         </div>
-                           <div class="md-card-block">
-                              <p class="m-b-20">
-                                 <span class="f-w-600 f-16 d-block m-b-10">ປະຫວັດຄວາມເປັນມາ</span>
-                                 {!! $item->content !!}
-                              </p>
-                           </div>
+                        <div class="md-card-block">
+                            <p class="m-b-20">
+                                <span class="f-w-600 f-16 d-block m-b-10">ປະຫວັດຄວາມເປັນມາ</span>
+                                {!! $item->content !!}
+                            </p>
                         </div>
-                     </div>
+                    </div>
                     @empty
-                        <p>No blog posts yet!</p>
+                        <p>ບໍ່ພົບຂໍ້ມູນປະຫວັດຄວາມເປັນມາ</p>
                     @endforelse
                 </div>
             </div>

@@ -41,7 +41,20 @@ class HistoryController extends Controller
      */
     public function store(HistoryPost $request)
     {
-        //
+        // $request->validate([
+        //     'title' => 'required',
+        //     'image' => 'required|image|mimes:jpg,png,jpeg,gif,svg|max:2048',
+        //     'description' => 'required',
+        // ]);
+        // $path = $request->file('image')->store('public/images');
+        // $post = new Post;
+        // $post->title = $request->title;
+        // $post->description = $request->description;
+        // $post->image = $path;
+        // $post->save();
+     
+        // return redirect()->route('posts.index')
+        //                 ->with('success','Post has been created successfully.');
     }
 
     /**
@@ -74,40 +87,27 @@ class HistoryController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(HistoryPost $request, $id)
+    public function update(Request $request, $id)
     {
-        $history = History::findOrFail($id);
-        $validatedData = $request->validated();
+        $request->validate([
+            'content' => 'required',
+            'image' => 'required',
+        ]);
+        $history = History::find($id);
+        if($request->hasFile('image')){
+            $request->validate([
+                'image' => 'required|image|mimes:jpg,png,jpeg,gif,svg|max:2048',
+            ]);
+            $path = $request->file('image')->store('public/image/history/');
+            $history->image = $path;
+        }
+        $history->image = $request->image;
+        $history->content = $request->content;
+        $history->save();
 
-        $history->fill($validatedData);
+        return redirect()->route('history.index')
+                        ->with('success','History updated successfully');
 
-        $oldimage = $request->oldimage;
-  	    $image = $request->image;
-            if ($image) {
-                $image_one = uniqid().'.'.$image->getClientOriginalExtension();
-                Image::make($image)->resize(500,300)->save('image/history/'.$image_one);
-                $data['image'] = 'image/history/'.$image_one;
-                // image/postimg/343434.png
-                DB::table('histories')->where('id',$id)->update($data);
-                unlink($oldimage);
-
-                $notification = array(
-                'message' => 'Post Updated Successfully',
-                'alert-type' => 'success'
-            );
-
-            return Redirect()->route('history.index')->with($notification);
-
-            }else{
-                $data['image'] = $oldimage;
-                DB::table('histories')->where('id',$id)->update($data);
-
-                $notification = array(
-                'message' => 'Post Updated Successfully',
-                'alert-type' => 'success'
-            );
-            return Redirect()->route('history.index')->with($notification);
-            }
     }
 
     /**
