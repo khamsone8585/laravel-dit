@@ -4,7 +4,7 @@
     {{-- value="{{ old('title', $structure->title ?? null) }}"/> --}}
 </div>
 <div class="form-group">
-    <label>File:</label>
-    <input type="file" name="file" class="form-control"/>
+    <label for="exampleFormControlFile1">ປ້ອນຟາຍຂໍ້ມູນ: </label>
+    <input type="file" class="form-control-file" id="exampleFormControlFile1">
 </div>
 

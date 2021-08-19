@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use App\Http\Requests\StructurePost;
 use App\Models\Structure;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\File;
 use Illuminate\Support\Facades\Storage;
 
 class StructureController extends Controller
@@ -36,24 +37,22 @@ class StructureController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(StructurePost $request)
     {
-        $request->validate([
-            'file' => 'required|mimes:png,jpg,jpeg,csv,txt,xlx,xls,pdf|max:2048'
-        ]);
+        $validatedData = $request->validated();
+        $validatedData['user_id'] = $request->user()->id;
+        $structure  = Structure::create($validatedData);
 
-        $file = new Structure;
-
-        if($request->file()) {
-            $name = time().'_'.$request->file->getClientOriginalName();
-            $filePath = $request->file('file')->storeAs('Structure', $name, 'public');
-
-            $file->name = time().'_'.$request->file->getClientOriginalName();
-            $file->file = '/storage/' . $filePath;
-            $file->save();
-
-            return redirect()->route('structure.index', ['file' => $file->id]);
+        if ($request->hasFile('thumbnail')) {
+            $path = $request->file('thumbnail')->store('thumbnails');
+            $blogPost->image()->save(
+                Image::create(['path' => $path])
+            );
         }
+        
+        $request->session()->flash('status', 'Blog post was created!');
+
+        return redirect()->route('posts.show', ['post' => $blogPost->id]);
     }
     /**
      * Display the specified resource.
@@ -61,6 +60,7 @@ class StructureController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
+
     public function show($id)
     {
         //
@@ -86,7 +86,35 @@ class StructureController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        $post = BlogPost::findOrFail($id);
+
+        // if (Gate::denies('update-post', $post)) {
+        //     abort(403, "You can't edit this blog post!");
+        // }
+        $this->authorize($post);
+
+        $validatedData = $request->validated();
+
+        $post->fill($validatedData);
+
+        if ($request->hasFile('thumbnail')) {
+            $path = $request->file('thumbnail')->store('thumbnails');
+            if ($post->image) {
+                Storage::delete($post->image->path);
+                $post->image->path = $path;
+                $post->image->save();
+            } else {
+                $post->image()->save(
+                    Image::create(['path' => $path])
+                );
+
+            }
+        }
+
+        $post->save();
+        $request->session()->flash('status', 'Blog post was updated!');
+
+        return redirect()->route('posts.show', ['post' => $post->id]);
     }
 
     /**
@@ -97,6 +125,19 @@ class StructureController extends Controller
      */
     public function destroy($id)
     {
-        //
+        $post = BlogPost::findOrFail($id);
+
+        // if (Gate::denies('delete-post', $post)) {
+        //     abort(403, "You can't delete this blog post!");
+        // }
+        $this->authorize($post);
+
+        $post->delete();
+
+        // BlogPost::destroy($id);
+
+        $request->session()->flash('status', 'Blog post was deleted!');
+
+        return redirect()->route('posts.index');
     }
 }
