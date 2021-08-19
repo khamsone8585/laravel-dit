@@ -44,12 +44,12 @@
                                     @endif
                                 </td>
                                 <td>
-                                    <a href="{{ route('history.edit', $item->id) }}" class="btn btn-info">Edit</a>
+                                    <a href="{{ route('history.edit', $item->id) }}" class="btn btn-info">ແກ້ໄຂ</a>
                                     {{-- <a href="" onclick="return confirm('Are you sure to delete')" class="btn btn-danger">Delete</a> --}}
                                 </td>
                             </tr>
                             @empty
-                                <p>No blog posts yet!</p>
+                                <p>ບໍ່ພົບຂໍ້ມູນປະຫວັດຄວາມເປັນມາ</p>
                             @endforelse
                             </tbody>
                         </table>
@@ -66,19 +66,26 @@
 
                     @forelse ( $history as $item )
 
-                    <div class="card">
+                    <div class="card flex-column">
                         <div class="card-block">
                             <div class="row">
-                                <div class="col-xl-2 col-lg-3 col-sm-3 col-xs-12">
-                                    <a href="" class="pop">
-                                        <img src="{{ $item->image }}" class="img-fluid" height="200" width="200">
-                                    </a>
+                                <a href="#" class="pop">
+                                    <img src="{{ $item->image }}" style="width: 800px; height: 500px;">
+                                </a>
+                            </div>
+                        </div>
+                        <div class="modal fade" id="imagemodal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+                            <div class="modal-dialog">
+                                <div class="modal-content">
+                                    <div class="modal-body">
+                                        <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
+                                        <img src="" class="imagepreview" style="width: 100%;" >
+                                    </div>
                                 </div>
                             </div>
                         </div>
                         <div class="md-card-block">
-                            <p class="m-b-20">
-                                <span class="f-w-600 f-16 d-block m-b-10">ປະຫວັດຄວາມເປັນມາ</span>
+                            <p class="m-b-20 px-3">
                                 {!! $item->content !!}
                             </p>
                         </div>
@@ -90,14 +97,5 @@
             </div>
         </div>
     </div>
-    <div class="modal fade" id="imagemodal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
-        <div class="modal-dialog">
-            <div class="modal-content">
-            <div class="modal-body">
-                <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
-                <img src="" class="imagepreview" style="width: 100%;" >
-            </div>
-            </div>
-        </div>
-    </div>
+
 @endsection

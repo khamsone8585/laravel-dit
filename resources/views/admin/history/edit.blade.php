@@ -25,8 +25,7 @@
 
                     <button type="submit" class="btn btn-inverse-success waves-effect waves-light" data-toggle="tooltip" data-placement="top" title="" ">ຕົກລົງ
                     </button>
-                    <button type="back" class="btn btn-inverse-warning waves-effect waves-light" data-toggle="tooltip" data-placement="top" title="">ກັບຄືນ
-                    </button>
+                    <input type="button" class="btn btn-inverse-warning waves-effect waves-light" onclick="history.go(-1);" value="ກັບຄືນ">
                 </form>
              </div>
         </div>

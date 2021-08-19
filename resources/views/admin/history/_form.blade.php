@@ -6,7 +6,7 @@
         </div>
         <div class="form-group col-md-8">
             <label for="exampleInputName1">ພາບເກົ່າ</label>
-            <img src="{{ Storage::url($history->image) }}" style="width: 70px; height: 50px;">
+            <img src="{{ $history->image }}" style="width: 70px; height: 50px;">
             <input type="hidden" name="oldimage" value="{{ $history->image }}">
         </div>
     </div>

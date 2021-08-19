@@ -6,9 +6,11 @@ use App\Http\Controllers\Controller;
 use App\Models\History;
 use App\Http\Requests\HistoryPost;
 use DB;
+use File;
 use Auth;
 use Image;
 use Illuminate\Http\Request;
+use Illuminate\Support\Carbon;
 
 class HistoryController extends Controller
 {
@@ -52,7 +54,7 @@ class HistoryController extends Controller
         // $post->description = $request->description;
         // $post->image = $path;
         // $post->save();
-     
+
         // return redirect()->route('posts.index')
         //                 ->with('success','Post has been created successfully.');
     }
@@ -93,20 +95,32 @@ class HistoryController extends Controller
             'content' => 'required',
             'image' => 'required',
         ]);
-        $history = History::find($id);
-        if($request->hasFile('image')){
-            $request->validate([
-                'image' => 'required|image|mimes:jpg,png,jpeg,gif,svg|max:2048',
-            ]);
-            $path = $request->file('image')->store('public/image/history/');
-            $history->image = $path;
-        }
-        $history->image = $request->image;
-        $history->content = $request->content;
-        $history->save();
+        $old_image = $request->old_image;
 
-        return redirect()->route('history.index')
-                        ->with('success','History updated successfully');
+        $image = $request->file('image');
+
+        if($image){
+            $name_gen = hexdec(uniqid());
+            $img_ext = strtolower($image->getClientOriginalExtension());
+            $img_name = $name_gen. '.' .$img_ext;
+            $up_location = 'image/history/';
+            $last_img = $up_location.$img_name;
+            $image->move($up_location,$img_name);
+
+            File::delete($old_image);
+            History::find($id)->update([
+                'content' => $request->content,
+                'image' => $last_img,
+                'created_at' => Carbon::now()
+            ]);
+            return Redirect()->route('history.index')->with('success','ອັບເດດຂໍ້ມູນປະຫວັດຄວາມເປັນມາສຳເລັດ!!');
+        }else{
+            History::find($id)->update([
+                'content' => $request->content,
+                'created_at' => Carbon::now()
+            ]);
+            return Redirect()->route('history.index')->with('success','ອັບເດດຂໍ້ມູນປະຫວັດຄວາມເປັນມາສຳເລັດ!!');
+        }
 
     }
 
