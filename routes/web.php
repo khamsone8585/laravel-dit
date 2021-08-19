@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\AdminController;
 use App\Http\Controllers\Backend\HistoryController;
+use App\Http\Controllers\Backend\StructureController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -27,3 +28,4 @@ Route::get('admin/logout',[AdminController::class,'Logout'])->name('admin.logout
 
 //admin History
 Route::resource('history',HistoryController::class);
+Route::resource('structure',StructureController::class);
