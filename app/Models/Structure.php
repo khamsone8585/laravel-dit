@@ -8,8 +8,7 @@ use Illuminate\Database\Eloquent\Model;
 class Structure extends Model
 {
     use HasFactory;
-    protected $fillable = [
-        'name',
-        'file'
-    ];
+    
+    protected $fillable = ['title','file'];
+
 }

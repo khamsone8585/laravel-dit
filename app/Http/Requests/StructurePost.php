@@ -24,8 +24,8 @@ class StructurePost extends FormRequest
     public function rules()
     {
         return [
-            'name'=> 'required|min:10',
-            'file' => 'required|mimes:csv,txt,xlx,xls,pdf|max:2048'
+            'title'=> 'required|min:5',
+            'file' => 'required|mimes:png,jpg,jpeg,csv,txt,xlx,xls,pdf|max:2048'
         ];
     }
 }

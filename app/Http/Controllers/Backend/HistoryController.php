@@ -95,6 +95,7 @@ class HistoryController extends Controller
             'content' => 'required',
             'image' => 'required',
         ]);
+
         $old_image = $request->old_image;
 
         $image = $request->file('image');

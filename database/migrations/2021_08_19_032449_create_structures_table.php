@@ -15,8 +15,8 @@ class CreateStructuresTable extends Migration
     {
         Schema::create('structures', function (Blueprint $table) {
             $table->id();
-            $table->string('name')->nullable();
-            $table->string('file')->nullable();
+            $table->string('title');
+            $table->string('file');
             $table->timestamps();
         });
     }

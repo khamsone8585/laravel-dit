@@ -31,23 +31,24 @@
                             </tr>
                             </thead>
                             <tbody>
-
+                                @foreach($str as $item)
                             <tr>
                                 <td>1</td>
-                                <td></td>
-                                <td></td>
+                                <td>{{ Str::limit($item->title, 10) }}</td>
+                                <td>{{ Str::limit($item->file, 10) }}</td>
                                 <td>
-                                    {{-- @if($item->created_at == NULL)
+                                    @if($item->created_at == NULL)
                                         <span class="text-danger">NO Date Set</span>
                                     @else
                                         {{ Carbon\Carbon::parse($item->created_at)->diffForHumans() }}
-                                    @endif --}}
+                                    @endif
                                 </td>
                                 <td>
-                                    <a href="{{ route('structure.create')}}" class="btn btn-info">ແກ້ໄຂ</a>
+                                    <a href="{{ route('structure.edit', $item->id)}}" class="btn btn-info">ແກ້ໄຂ</a>
                                     {{-- <a href="" onclick="return confirm('Are you sure to delete')" class="btn btn-danger">Delete</a> --}}
                                 </td>
                             </tr>
+                                @endforeach
                             </tbody>
                         </table>
                     </div>
@@ -60,11 +61,12 @@
                     <div class="card-header text-center">
                         <h5 class="card-header-text">ຕົວຢ່າງສະແດງເນື້ອໃນ</h5>
                     </div>
+                    @forelse ( $str as $item )
                     <div class="card flex-column">
                         <div class="card-block">
                             <div class="row">
                                 <a href="#" class="pop">
-                                    <img src="" style="width: 800px; height: 500px;">
+                                    <img src="{{ asset('image/structures/'.$item->file) }}" style="width: 800px; height: 500px;">
                                 </a>
                             </div>
                         </div>
@@ -84,6 +86,7 @@
                             </p>
                         </div>
                     </div>
+                    @endforeach
                 </div>
             </div>
         </div>

@@ -10,15 +10,16 @@
                 <ol class="breadcrumb breadcrumb-title breadcrumb-arrow">
                     <li class="breadcrumb-item"><a href="{{route('dashboard')}}"><i class="icofont icofont-home"></i></a>
                     </li>
-                    <li class="breadcrumb-item">ສ້າງຂໍ້ມູນ
+                    <li class="breadcrumb-item">ແກ້ໄຂຂໍ້ມູນ
                     </li>
                 </ol>
             </div>
         </div>
         <div class="col-sm-8 py-3">
             <div class="form-group">
-                <form action="{{route('structure.store')}}" method="post" enctype="multipart/form-data">
+                <form action="{{route('structure.update', $str->id)}}" method="post" enctype="multipart/form-data">
                     @csrf
+                    @method('PUT')
 
                     @include('admin.structure._form')
 

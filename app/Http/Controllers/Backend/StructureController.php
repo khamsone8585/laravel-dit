@@ -6,9 +6,10 @@ use App\Http\Controllers\Controller;
 use App\Http\Requests\StructurePost;
 use App\Models\Structure;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\File;
+use Illuminate\Support\Carbon;
+use File;
+use Image;
 use Illuminate\Support\Facades\Storage;
-
 class StructureController extends Controller
 {
     /**
@@ -18,7 +19,8 @@ class StructureController extends Controller
      */
     public function index()
     {
-        return view('admin.structure.index');
+        $str = Structure::all();
+        return view('admin.structure.index',compact('str'));
     }
 
     /**
@@ -28,7 +30,7 @@ class StructureController extends Controller
      */
     public function create()
     {
-        return view('admin.structure.create');
+        //
     }
 
     /**
@@ -39,20 +41,23 @@ class StructureController extends Controller
      */
     public function store(StructurePost $request)
     {
+        $strPost = Structure::find($id);
         $validatedData = $request->validated();
         $validatedData['user_id'] = $request->user()->id;
-        $structure  = Structure::create($validatedData);
 
-        if ($request->hasFile('thumbnail')) {
-            $path = $request->file('thumbnail')->store('thumbnails');
-            $blogPost->image()->save(
-                Image::create(['path' => $path])
-            );
+        if($request->hasfile('profile_image'))
+        {
+            $file = $request->file('file');
+            $extention = $file->getClientOriginalExtension();
+            $filename = time().'.'.$extention;
+            $file->move('image/structures/', $filename);
+            $strPost->file = $filename;
         }
-        
-        $request->session()->flash('status', 'Blog post was created!');
+        $strPost->save();
+        return redirect()->back()->with('status','strPost Image Added Successfully');
 
-        return redirect()->route('posts.show', ['post' => $blogPost->id]);
+
+
     }
     /**
      * Display the specified resource.
@@ -74,7 +79,8 @@ class StructureController extends Controller
      */
     public function edit($id)
     {
-        //
+        $str = Structure::find($id);
+        return view('admin.structure.edit',compact('str'));
     }
 
     /**
@@ -84,37 +90,32 @@ class StructureController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(StructurePost $request, $id)
     {
-        $post = BlogPost::findOrFail($id);
-
-        // if (Gate::denies('update-post', $post)) {
-        //     abort(403, "You can't edit this blog post!");
-        // }
-        $this->authorize($post);
-
+        $strPost = Structure::find($id);
         $validatedData = $request->validated();
+        $validatedData['user_id'] = $request->user()->id;
 
-        $post->fill($validatedData);
+        $strPost->title = $request->input('title');
 
-        if ($request->hasFile('thumbnail')) {
-            $path = $request->file('thumbnail')->store('thumbnails');
-            if ($post->image) {
-                Storage::delete($post->image->path);
-                $post->image->path = $path;
-                $post->image->save();
-            } else {
-                $post->image()->save(
-                    Image::create(['path' => $path])
-                );
-
+        if($request->hasfile('file'))
+        {
+            
+            $destination = 'structures/'.$strPost->file;
+            if(File::exists($destination))
+            {
+                File::delete($destination);
             }
+
+            $file = $request->file('file');
+            $extention = $file->getClientOriginalExtension();
+            $filename = time().'.'.$extention;
+            $file->move('image/structures/', $filename);
+            $strPost->file = $filename;
         }
 
-        $post->save();
-        $request->session()->flash('status', 'Blog post was updated!');
-
-        return redirect()->route('posts.show', ['post' => $post->id]);
+        $strPost->update();
+        return redirect()->route('structure.index')->with('status','strPost Image Updated Successfully');
     }
 
     /**
@@ -125,19 +126,13 @@ class StructureController extends Controller
      */
     public function destroy($id)
     {
-        $post = BlogPost::findOrFail($id);
-
-        // if (Gate::denies('delete-post', $post)) {
-        //     abort(403, "You can't delete this blog post!");
-        // }
-        $this->authorize($post);
-
-        $post->delete();
-
-        // BlogPost::destroy($id);
-
-        $request->session()->flash('status', 'Blog post was deleted!');
-
-        return redirect()->route('posts.index');
+        $strPost = Structure::find($id);
+        $destination = 'image/structures/'.$strPost->file;
+        if(File::exists($destination))
+        {
+            File::delete($destination);
+        }
+        $strPost->delete();
+        return redirect()->back()->with('status','strPost Image Deleted Successfully');
     }
 }
