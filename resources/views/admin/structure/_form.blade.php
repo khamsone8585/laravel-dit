@@ -14,3 +14,13 @@
     <input type="file" name="file" class="form-control-file" id="exampleFormControlFile1" value="{{ old('file', $str->file ?? null) }}">
 </div>
 
+@if($errors->any())
+    <div>
+        <ul>
+            @foreach($errors->all() as $error)
+                <li>{{ $error }}</li>
+            @endforeach
+        </ul>
+    </div>
+@endif
+

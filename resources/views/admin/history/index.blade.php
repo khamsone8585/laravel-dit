@@ -1,7 +1,7 @@
 
 @extends('admin.admin_master')
 
-@section('title','Admin | History Page')
+@section('title','History Page')
 
 @section('content')
     <div>

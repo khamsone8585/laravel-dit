@@ -21,6 +21,7 @@
                         <li><i class="bx bx-chevron-right"></i> <a href="">ຂ່າວປະຊາສຳພັນ</a></li>
                         <li><i class="bx bx-chevron-right"></i> <a href="">ຂໍ້ມູນສະຖິຕິ/ບົດຄົ້ນຄວ້າ</a></li>
                         <li><i class="bx bx-chevron-right"></i> <a href="">ກົດໝາຍ ແລະ ດຳລັດ</a></li>
+                        <li><i class="bx bx-chevron-right"></i> <a href="{{ route('login') }}">ເຂົ້າສູ່ລະບົບຄຸ້ມຄອງ</a></li>
                     </ul>
                 </div>
                 <div class="col-lg-4 col-md-6 footer-links">

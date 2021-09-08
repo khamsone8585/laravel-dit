@@ -1,4 +1,8 @@
-@extends('layouts.app')
+@php
+$history = DB::table('histories')->get();
+@endphp
+
+@extends('main.home')
 
 @section('title','History Page')
 
@@ -15,9 +19,16 @@
     <!-- ======= Portfolio Details Section ======= -->
     <section id="portfolio-details" class="portfolio-details">
         <div class="container">
-            <div class="portfolio-description">
-                <p>ກໍາລັງປັບປຸງຂໍ້ມູນ.</p>
+            @foreach ($history as $item)
+            <img src="{{ $item->image }}" style="width: 800px; height: 500px;">
+            <br>
+            <br>
+            <div class="row">
+                <div class="col-md-12">
+                    {!! $item->content !!}
+                </div>
             </div>
+            @endforeach
         </div>
     </section>
     <!-- End Portfolio Details Section -->

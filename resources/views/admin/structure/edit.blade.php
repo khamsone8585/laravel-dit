@@ -1,6 +1,6 @@
 @extends('admin.admin_master')
 
-@section('title','Admin | Structure Page')
+@section('title','Structure Page')
 
 @section('content')
     <div>
@@ -25,7 +25,7 @@
 
                     <button type="submit" class="btn btn-inverse-success waves-effect waves-light" data-toggle="tooltip" data-placement="top" title="" ">ຕົກລົງ
                     </button>
-                    <input type="button" class="btn btn-inverse-warning waves-effect waves-light" onclick="history.go(-1);" value="ກັບຄືນ">
+                    <a href="{{route('structure.index')}}" class="btn btn-inverse-warning waves-effect waves-light">ກັບຄືນ</a>
                 </form>
              </div>
         </div>

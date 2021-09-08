@@ -4,7 +4,6 @@
 <head>
     <title>DIT-MOIC | admin | @yield('title') </title>
 
-
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1.0, user-scalable=no">
@@ -107,6 +106,27 @@
             $('#summernote').summernote({
                 height: 450,
             });
+        });
+    </script>
+    <script>
+        var gArrayFonts = ['Phetsarath_OT','NotoSansLao'];
+        jQuery('#' + myID).summernote({
+            fontNames: gArrayFonts,
+            fontNamesIgnoreCheck: gArrayFonts,
+            fontSizes: ['8', '9', '10', '11', '12', '13', '14', '15', '16', '18', '20', '22' , '24', '28', '32', '36', '40', '48'],
+            followingToolbar: false,
+            dialogsInBody: true,
+            toolbar: [
+            // [groupName, [list of button]]
+            ['style'],
+            ['style', ['clear', 'bold', 'italic', 'underline']],
+            ['fontname', ['fontname']],
+            ['fontsize', ['fontsize']],
+            ['color', ['color']],
+            ['para', ['ul', 'ol', 'paragraph']],
+            ['table', ['table']],
+            ['view', ['codeview']]
+            ]
         });
     </script>
     <script>

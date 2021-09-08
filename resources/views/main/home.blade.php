@@ -1,3 +1,10 @@
+@php
+
+$news = DB::table('news')->get();
+$cates = DB::table('category_news')->get();
+
+@endphp
+
 @extends('main.home_master')
 
 @section('title','Home Page')
@@ -79,89 +86,20 @@
                 <p>ແຈ້ງການປັບລາຄານໍ້າມັນ ຂ່າວປະຊາສຳພັນ ຮູບພາບກິດຈະກຳ</p>
             </div>
             <div class="row portfolio-container">
+                @foreach ($news as $item)
                 <div class="col-lg-4 col-md-6 portfolio-item filter-app">
                     <div class="portfolio-wrap">
-                        <img src="{{asset('frontend/assets/img/fuel_price.jpg')}}" class="img-fluid" alt="">
+                        <img src="{{asset('image/news/'.$item->picture)}}" class="img-fluid" alt="">
                         <div class="portfolio-info">
-                            <h4>ແຈ້ງການລາຄານໍ້າມັນ</h4>
-                            <p>ຄັ້ງວັນທີ 09/03/2021</p>
+                            <h4>{{$item->title}}</h4>
+                            <p>ຄັ້ງວັນທີ {{ Carbon\Carbon::parse($item->created_at)->format('d.m.Y') }}</p>
                             <div class="portfolio-links">
-                                <a href="" title="ອ່ານລະອຽດເພີ່ມ"><i class="ri-links-fill"></i></a>
+                                <a href="{{url('NewsDetail/'.$item->id)}}" title="ອ່ານລະອຽດເພີ່ມ"><i class="ri-links-fill"></i></a>
                             </div>
                         </div>
                     </div>
                 </div>
-                <div class="col-lg-4 col-md-6 portfolio-item filter-web">
-                    <div class="portfolio-wrap">
-                        <img src="{{asset('frontend/assets/img/news_1.jpg')}}" class="img-fluid" alt="">
-                        <div class="portfolio-info">
-                            <h4>ຂ່າວ</h4>
-                            <p>ທ່ານ ນາງ ເຂັມມະນີ ສະເໜີພາກສ່ວນກ່ຽວຂ້ອງ ເບິ່ງຄືນມາດຖານສ້າງປ້ຳນ້ຳມັນໃນເຂດຊຸມຊົນ</p>
-                            <!--
-                            <div class="portfolio-links">
-                                <a href="assets/img/news_1.jpg" data-gall="portfolioGallery" class="venobox" title="ຂ່າວ"><i class="ri-add-fill"></i></a>
-                                <a href="news.html" title="ອ່ານລະອຽດເພີ່ມ"><i class="ri-links-fill"></i></a>
-                            </div>
-                            -->
-                        </div>
-                    </div>
-                </div>
-                <div class="col-lg-4 col-md-6 portfolio-item filter-app">
-                    <div class="portfolio-wrap">
-                        <img src="{{asset('frontend/assets/img/news_4.jpg')}}" class="img-fluid" alt="">
-                        <div class="portfolio-info">
-                            <h4>ຂ່າວພາຍໃນກົມ</h4>
-                            <p>ກອງປະຊຸມໃຫຍ່ໜ່ວຍພັກ ກຄພນ ຄັ້ງທີ V</p>
-                            <!--
-                            <div class="portfolio-links">
-                                <a href="news.html" title="ອ່ານລະອຽດເພີ່ມ"><i class="ri-links-fill"></i></a>
-                            </div>
-                            -->
-                        </div>
-                    </div>
-                </div>
-                <div class="col-lg-4 col-md-6 portfolio-item filter-card">
-                    <div class="portfolio-wrap">
-                        <img src="{{asset('frontend/assets/img/news_3.jpg')}}" class="img-fluid" alt="">
-                        <div class="portfolio-info">
-                            <h4>ຂ່າວ</h4>
-                            <p>ກອງປະຊຸມປືກສາຫາລື ກ່ຽວກັບ ຜົນກະທົບໂຄງສ້າງລາຄານໍ້າມັນເຊື້ອໄຟ</p>
-                            <!--
-                            <div class="portfolio-links">
-                                <a href="news.html" title="ອ່ານລະອຽດເພີ່ມ"><i class="ri-links-fill"></i></a>
-                            </div>
-                            -->
-                        </div>
-                    </div>
-                </div>
-                <div class="col-lg-4 col-md-6 portfolio-item filter-web">
-                    <div class="portfolio-wrap">
-                        <img src="{{asset('frontend/assets/img/news_2.jpg')}}" class="img-fluid" alt="">
-                        <div class="portfolio-info">
-                            <h4>ຂ່າວ</h4>
-                            <p>ກະຊວງ ອຄ ເປີດພິທີນຳໃຊ້ ສາຍດ່ວນ 1510 ເພື່ອປົກປ້ອງຜູ້ຊົມໃຊ້</p>
-                            <!--
-                            <div class="portfolio-links">
-                                <a href="news.html" title="ອ່ານລະອຽດເພີ່ມ"><i class="ri-links-fill"></i></a>
-                            </div>
-                            -->
-                        </div>
-                    </div>
-                </div>
-                <div class="col-lg-4 col-md-6 portfolio-item filter-web">
-                    <div class="portfolio-wrap">
-                        <img src="{{asset('frontend/assets/img/activities_1.jpg')}}" class="img-fluid" alt="">
-                        <div class="portfolio-info">
-                            <h4>ກິດຈະກຳ</h4>
-                            <p>ຂະບວນແຂ່ງຂັນກິລາຂໍ່ານັບຮັບຕ້ອນ​ກອງປະຊຸມເປີດກ້ວາງກາງສະໄໝ</p>
-                            <!--
-                            <div class="portfolio-links">
-                                <a href="news.html" title="ອ່ານລະອຽດເພີ່ມ"><i class="ri-links-fill"></i></a>
-                            </div>
-                            -->
-                        </div>
-                    </div>
-                </div>
+                @endforeach
             </div>
         </div>
     </section>

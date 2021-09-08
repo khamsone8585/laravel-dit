@@ -7,7 +7,7 @@
     <meta content="ກົມການຄ້າພາຍໃນ ກະຊວງອຸດສາຫະກໍາ ແລະ ການຄ້າ" name="descriptison">
     <meta content="ກົມການຄ້າພາຍໃນ, ກະຊວງອຸດສາຫະກໍາ ແລະ ການຄ້າ, ສປປ ລາວ" name="keywords">
     <!-- Favicons -->
-    
+
     <link href="{{asset('frontend/assets/img/dit.ico')}}" rel="icon">
     <link href="{{asset('frontend/assets/img/apple-touch-icon.png" rel="apple-touch-icon')}}">
     <!-- Vendor CSS Files -->
@@ -33,7 +33,7 @@
     <!-- ======= Main Contents ======= -->
 
     <main id="main">
-        
+
         @yield('content')
 
     </main>
@@ -65,6 +65,20 @@
         }
         gtag('js', new Date());
         gtag('config', 'UA-176078140-1');
+    </script>
+
+    {{-- image model Gallery --}}
+    <script>
+        $(function() {
+            $('a.thumbnail').click(function(e) {
+                e.preventDefault();
+                $('#image-modal .modal-body img').attr('src', $(this).find('img').attr('src'));
+                $("#image-modal").modal('show');
+            });
+            $('#image-modal .modal-body img').on('click', function() {
+                $("#image-modal").modal('hide')
+            });
+        });
     </script>
 </body>
 </html>

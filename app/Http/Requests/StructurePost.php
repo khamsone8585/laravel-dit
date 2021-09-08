@@ -25,7 +25,7 @@ class StructurePost extends FormRequest
     {
         return [
             'title'=> 'required|min:5',
-            'file' => 'required|mimes:png,jpg,jpeg,csv,txt,xlx,xls,pdf|max:2048'
+            'file' => 'required|mimes:png,jpg,jpeg|max:2048'
         ];
     }
 }

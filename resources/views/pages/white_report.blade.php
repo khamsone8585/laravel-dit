@@ -1,6 +1,4 @@
-
-@extends('layouts.app')
-
+@extends('main.home')
 @section('title','White_Report Page')
 
 @section('content')

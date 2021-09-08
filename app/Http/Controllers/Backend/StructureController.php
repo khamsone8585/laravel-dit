@@ -41,7 +41,6 @@ class StructureController extends Controller
      */
     public function store(StructurePost $request)
     {
-        $strPost = Structure::find($id);
         $validatedData = $request->validated();
         $validatedData['user_id'] = $request->user()->id;
 
@@ -100,7 +99,7 @@ class StructureController extends Controller
 
         if($request->hasfile('file'))
         {
-            
+
             $destination = 'structures/'.$strPost->file;
             if(File::exists($destination))
             {

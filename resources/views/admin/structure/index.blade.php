@@ -1,7 +1,7 @@
 
 @extends('admin.admin_master')
 
-@section('title','Admin | Structure Page')
+@section('title','Structure Page')
 
 @section('content')
     <div>
